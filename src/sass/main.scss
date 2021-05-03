@@ -1,0 +1,12 @@
+/*
+ * The main SASS file only imports all other partials that compose the app's style.
+ *
+ * reset - Contains a modern CSS reset by Andy Bell.
+ * colors - Contains CSS custom properties definitions for colors
+ * base - Contains basic elements and typography styling
+ * utils - Contains utility classes, such as flexbox utils and margins
+ */
+@use 'reset';
+@use 'colors';
+@use 'base';
+@use 'utils';
