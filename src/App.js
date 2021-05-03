@@ -1,28 +1,15 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 
+import AppContext from './store/AppContext';
 import AuthPanel from './components/authentication/AuthPanel';
 
 function App() {
-  const [authed, setAuthed] = useState(false);
+  const [state] = useContext(AppContext);
 
-  const handleAuthSubmit = (event, username, password) => {
-    event.preventDefault();
-
-    fetch('http://localhost:3004/auth')
-      .then((data) => data.json())
-      .then((json) => {
-        if (username === json.username && password === json.password) {
-          setAuthed(true);
-        } else {
-          console.log('NOOOPE');
-        }
-      });
-  };
-
-  if (!authed) {
+  if (!state.isAuthed) {
     return (
       <main>
-        <AuthPanel onSubmit={handleAuthSubmit} />
+        <AuthPanel />
       </main>
     );
   }

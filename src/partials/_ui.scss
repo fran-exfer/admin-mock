@@ -76,3 +76,13 @@ textarea {
     }
   }
 }
+
+// Error messages
+.error {
+  margin-bottom: 1rem;
+  padding: 0.7rem 1.2rem;
+  background-color: var(--c-danger-90);
+  border: 1px solid var(--c-danger-50);
+  border-radius: 5px;
+  color: var(--c-danger-30);
+}
