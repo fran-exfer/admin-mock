@@ -1,23 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
+import AuthPanel from './components/authentication/AuthPanel';
 
 function App() {
-  const [clients, setClients] = useState([]);
+  const [authed, setAuthed] = useState(false);
 
-  useEffect(() => {
-    fetch('http://localhost:3004/clients')
-      .then((data) => data.json())
-      .then((json) => setClients(json));
-  }, []);
+  if (!authed) {
+    return (
+      <main>
+        <AuthPanel />
+      </main>
+    );
+  }
 
-  return (
-    <>
-      <ul>
-        {clients.map((client) => (
-          <li key={client.id}>{client.name}</li>
-        ))}
-      </ul>
-    </>
-  );
+  return <main></main>;
 }
 
 export default App;

@@ -1,0 +1,11 @@
+/*
+ * Global SASS classes.
+ *
+ * Components in particular are styled using SASS modules in the same
+ * folder as the component in question.
+ */
+
+@use 'partials/base';
+@use 'partials/variables';
+@use 'partials/ui';
+@use 'partials/utilities';

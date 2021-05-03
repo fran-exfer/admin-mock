@@ -1,4 +1,8 @@
+/*
+ * CSS Custom Properties
+ */
 :root {
+  // COLORS
   --c-neutral-10: hsl(0, 0%, 10%);
   --c-neutral-20: hsl(0, 0%, 20%);
   --c-neutral-30: hsl(0, 0%, 30%);
@@ -8,6 +12,7 @@
   --c-neutral-70: hsl(0, 0%, 70%);
   --c-neutral-80: hsl(0, 0%, 80%);
   --c-neutral-90: hsl(0, 0%, 90%);
+  --c-neutral-95: hsl(0, 0%, 95%);
 
   --c-primary-30: hsl(205, 100%, 30%);
   --c-primary-50: hsl(205, 80%, 50%);

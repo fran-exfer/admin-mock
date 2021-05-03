@@ -1,0 +1,30 @@
+/*
+ * Resets and base styles
+ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(var(--c-primary-50), var(--c-primary-30))
+    no-repeat;
+  color: var(--c-neutral-10);
+}
+
+main {
+  max-width: 70vw;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
