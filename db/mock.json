@@ -1,0 +1,9 @@
+{
+  "auth": { "username": "test", "password": "mock" },
+  "clients": [
+    { "id": 1, "name": "Joseph McGilligan" },
+    { "id": 2, "name": "Mary Poppins" },
+    { "id": 3, "name": "Jaime Remobra" },
+    { "id": 4, "name": "Kori Chills" }
+  ]
+}
