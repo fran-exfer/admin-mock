@@ -1,9 +1,30 @@
 {
   "auth": { "username": "test", "password": "mock" },
   "clients": [
-    { "id": 1, "name": "Joseph McGilligan" },
-    { "id": 2, "name": "Mary Poppins" },
-    { "id": 3, "name": "Jaime Remobra" },
-    { "id": 4, "name": "Kori Chills" }
-  ]
+    {
+      "id": 1,
+      "name": "Joseph McGilligan",
+      "email": "j.mcgilligan@fmail.com",
+      "address": "Test St. 1, 4th floor"
+    },
+    {
+      "id": 2,
+      "name": "Mary Poppins",
+      "email": "s.califragil@fmail.com",
+      "address": "Sky Avenue 23, L"
+    },
+    {
+      "id": 3,
+      "name": "Jaime Remobra",
+      "email": "mh.jaime@fmail.com",
+      "address": "Ice Map, Zone 10"
+    },
+    {
+      "id": 4,
+      "name": "Kori Chills",
+      "email": "ame.rocks@fmail.com",
+      "address": "Residential District, no. 5"
+    }
+  ],
+  "products": []
 }

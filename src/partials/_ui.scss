@@ -60,20 +60,28 @@ textarea {
   font-size: 1rem;
   transition: 0.2s all;
 
-  &--primary {
-    background-color: var(--c-primary-50);
+  $buttons: ('primary', 'secondary', 'danger');
+  @each $type in $buttons {
+    &--#{$type} {
+      background-color: var(--c-#{$type}-50);
 
-    &:hover {
-      background-color: var(--c-primary-70);
-    }
+      &:hover {
+        background-color: var(--c-#{$type}-70);
+      }
 
-    &:active {
-      background-color: var(--c-primary-30);
-    }
+      &:active {
+        background-color: var(--c-#{$type}-30);
+      }
 
-    &:focus {
-      border: 2px solid var(--c-primary-30);
+      &:focus {
+        border: 2px solid var(--c-#{$type}-30);
+      }
     }
+  }
+
+  &--disabled {
+    background-color: var(--c-neutral-50);
+    color: var(--c-neutral-70);
   }
 }
 

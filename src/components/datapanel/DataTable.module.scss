@@ -1,0 +1,19 @@
+.datatable {
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 0;
+    padding: 0.5rem;
+  }
+
+  > thead {
+    background-color: var(--c-primary-90);
+    text-align: left;
+    text-transform: capitalize;
+  }
+
+  > tbody tr:nth-child(2n) {
+    background-color: var(--c-neutral-90);
+  }
+}

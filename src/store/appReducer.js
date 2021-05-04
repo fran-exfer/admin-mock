@@ -10,6 +10,17 @@ function appReducer(state, action) {
       };
 
     /*
+     * Data operations
+     * We use computed property names to avoid code repetition. These actions work with
+     * clients, products, and potentially any other data array in our state.
+     */
+    case 'data/fetch':
+      return {
+        ...state,
+        [action.datatype]: action.data,
+      };
+
+    /*
      * If an action.type isn't supported, we should at least throw an error.
      */
     default:

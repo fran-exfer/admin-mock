@@ -18,3 +18,27 @@
 .justify-between {
   justify-content: space-between;
 }
+
+// Margins
+@for $i from 1 through 8 {
+  $base-size: 0.5rem;
+
+  $margins: (
+    'm': margin,
+    'mt': margin-top,
+    'mr': margin-right,
+    'mb': margin-bottom,
+    'ml': margin-left,
+  );
+
+  @each $class, $prop in $margins {
+    .#{$class}-#{$i} {
+      #{$prop}: $i * $base-size;
+    }
+  }
+}
+
+// Capitalizes a word of a group of words
+.capitalize {
+  text-transform: capitalize;
+}

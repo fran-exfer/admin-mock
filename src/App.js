@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 
 import AppContext from './store/AppContext';
+
 import AuthPanel from './components/authentication/AuthPanel';
+import DataPanel from './components/datapanel/DataPanel';
 
 function App() {
   const [state] = useContext(AppContext);
@@ -16,7 +18,7 @@ function App() {
 
   return (
     <main>
-      <h1>Logged in!</h1>
+      <DataPanel />
     </main>
   );
 }
