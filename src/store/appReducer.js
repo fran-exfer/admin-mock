@@ -29,8 +29,8 @@ function appReducer(state, action) {
     case 'data/update':
       return {
         ...state,
-        [action.datatype]: state[action.datatype].map((data) =>
-          data.id === action.body.id ? action.body : data
+        [action.datatype]: state[action.datatype].map((item) =>
+          item.id === action.data.id ? action.data : item
         ),
       };
 

@@ -17,24 +17,28 @@ function ClientsModal() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const data = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      address: addressRef.current.value,
+    };
+
     /*
      * Check if we're creating or updating an item
      */
     if (state.modalCurrentItem === null) {
       // Creating an item
-      const data = {
-        id: Math.max(...state.clients.map((client) => client.id)) + 1,
-        name: nameRef.current.value,
-        email: emailRef.current.value,
-        address: addressRef.current.value,
-      };
-
-      api.createData('clients', data).then(() => {
+      api.createData(state.clients, 'clients', data).then(() => {
         dispatch({ type: 'data/create', datatype: 'clients', data });
         dispatch({ type: 'modal/close' });
       });
     } else {
       // Updating an item
+      api
+        .updateData('clients', state.modalCurrentItem.id, data)
+        .then(() =>
+          dispatch({ type: 'data/update', datatype: 'clients', data })
+        );
     }
   };
 

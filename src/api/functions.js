@@ -1,18 +1,34 @@
+const HOST = 'http://localhost:3004';
+
 export async function login(typedUsername, typedPassword) {
-  let data = await fetch('http://localhost:3004/auth');
+  let data = await fetch(`${HOST}/auth`);
   data = await data.json();
 
   return typedUsername === data.username && typedPassword === data.password;
 }
 
 export async function fetchData(datatype) {
-  const data = await fetch(`http://localhost:3004/${datatype}`);
+  const data = await fetch(`${HOST}/${datatype}`);
   return data.json();
 }
 
-export function createData(datatype, data) {
-  return fetch(`http://localhost:3004/${datatype}`, {
+export function createData(dataArray, datatype, data) {
+  data.id = Math.max(...dataArray.map((item) => item.id)) + 1;
+
+  return fetch(`${HOST}/${datatype}`, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+}
+
+export function updateData(datatype, id, data) {
+  data.id = id;
+
+  return fetch(`${HOST}/${datatype}/${id}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
