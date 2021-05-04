@@ -33,6 +33,12 @@
       "name": "Daniel Craig",
       "email": "007@fmail.com",
       "address": "Somewhere in Praga"
+    },
+    {
+      "id": 7,
+      "name": "Harry Potter",
+      "email": "h.potter@hogwarts.co.uk",
+      "address": "Cupboard under the stairs, 4 Privet Drive"
     }
   ],
   "products": []

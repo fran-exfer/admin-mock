@@ -1,6 +1,7 @@
 import { useContext, useRef } from 'react';
 
 import AppContext from '../../store/AppContext';
+import * as api from '../../api/functions';
 
 function ClientsModal() {
   const [state, dispatch] = useContext(AppContext);
@@ -17,37 +18,24 @@ function ClientsModal() {
     event.preventDefault();
 
     /*
-     * Use the id of the current item or, if it's a new item,
-     * use auto-incremental id numbers. Change the method
-     * accordingly, then fetch!
+     * Check if we're creating or updating an item
      */
-    let id;
-    let method;
-    if (state.modalCurrentItem) {
-      id = state.modalCurrentItem.id;
-      method = 'PUT';
+    if (state.modalCurrentItem === null) {
+      // Creating an item
+      const data = {
+        id: Math.max(...state.clients.map((client) => client.id)) + 1,
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        address: addressRef.current.value,
+      };
+
+      api.createData('clients', data).then(() => {
+        dispatch({ type: 'data/create', datatype: 'clients', data });
+        dispatch({ type: 'modal/close' });
+      });
     } else {
-      id = Math.max(...state.clients.map((client) => client.id)) + 1;
-      method = 'POST';
+      // Updating an item
     }
-
-    const body = {
-      id,
-      name: nameRef.current.value,
-      email: emailRef.current.value,
-      address: addressRef.current.value,
-    };
-
-    fetch('http://localhost:3004/clients', {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    }).then(() => {
-      dispatch({ type: 'data/save', datatype: 'clients', method, body });
-      dispatch({ type: 'modal/close' });
-    });
   };
 
   return (
