@@ -1,6 +1,7 @@
 import { useContext, useState, useRef } from 'react';
 
 import AppContext from '../../store/AppContext';
+import * as api from '../../api/functions';
 import styles from './AuthPanel.module.scss';
 
 function AuthPanel() {
@@ -13,13 +14,10 @@ function AuthPanel() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('http://localhost:3004/auth')
-      .then((data) => data.json())
-      .then((json) => {
-        if (
-          usernameRef.current.value === json.username &&
-          passwordRef.current.value === json.password
-        ) {
+    api
+      .login(usernameRef.current.value, passwordRef.current.value)
+      .then((success) => {
+        if (success) {
           setAuthError(false);
           dispatch({ type: 'auth/login' });
         } else {
