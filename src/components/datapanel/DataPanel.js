@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import DataSelector from './DataSelector';
 import DataTable from './DataTable';
 
 function DataPanel() {
@@ -11,25 +12,7 @@ function DataPanel() {
 
   return (
     <section>
-      <div className="mb-2">
-        <button
-          className={`btn mr-1 ${
-            datatype === 'products' ? 'btn--secondary' : 'btn--disabled'
-          }`}
-          onClick={toggleDatatype}
-        >
-          See clients data
-        </button>
-        <button
-          className={`btn mr-1 ${
-            datatype === 'clients' ? 'btn--secondary' : 'btn--disabled'
-          }`}
-          onClick={toggleDatatype}
-        >
-          See products data
-        </button>
-      </div>
-
+      <DataSelector datatype={datatype} toggleDatatype={toggleDatatype} />
       <div className="panel">
         <h1>
           <span className="capitalize">{datatype}</span> data

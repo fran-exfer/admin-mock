@@ -16,8 +16,6 @@ function DataTable({ datatype }) {
     return <p>{`There are no ${datatype} in the system.`}</p>;
   }
 
-  console.log(datatype, state[datatype].length);
-
   const datatypeKeys = Object.keys(state[datatype][0]);
 
   return (
