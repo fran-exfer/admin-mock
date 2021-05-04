@@ -1,15 +1,16 @@
 import { useContext, useEffect } from 'react';
 
 import AppContext from '../../store/AppContext';
+import * as api from '../../api/functions';
 import styles from './DataTable.module.scss';
 
 function DataTable({ datatype }) {
   const [state, dispatch] = useContext(AppContext);
 
   useEffect(() => {
-    fetch(`http://localhost:3004/${datatype}`)
-      .then((data) => data.json())
-      .then((json) => dispatch({ type: 'data/fetch', datatype, data: json }));
+    api
+      .fetchData(datatype)
+      .then((data) => dispatch({ type: 'data/fetch', datatype, data }));
   }, [datatype, dispatch]);
 
   if (state[datatype].length === 0) {
