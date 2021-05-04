@@ -18,9 +18,16 @@
 .justify-between {
   justify-content: space-between;
 }
+.justify-around {
+  justify-content: space-around;
+}
+
+.align-center {
+  align-items: center;
+}
 
 // Margins
-@for $i from 1 through 8 {
+@for $i from 0 through 8 {
   $base-size: 0.5rem;
 
   $margins: (

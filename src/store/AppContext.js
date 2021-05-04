@@ -11,8 +11,8 @@ export function AppContextProvider(props) {
     products: [],
     loading: true,
     error: null,
-    isDialogOpen: false,
-    dialogCurrentItem: null,
+    isModalOpen: false,
+    modalCurrentItem: null,
   });
 
   return (

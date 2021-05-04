@@ -23,15 +23,15 @@ function DataTable({ datatype }) {
       <thead>
         <tr>
           {datatypeKeys.map((key) => (
-            <th>{key}</th>
+            <th key={key}>{key}</th>
           ))}
         </tr>
       </thead>
       <tbody>
         {state[datatype].map((item) => (
-          <tr>
+          <tr key={item.id}>
             {datatypeKeys.map((key) => (
-              <td>{item[key]}</td>
+              <td key={key}>{item[key]}</td>
             ))}
           </tr>
         ))}

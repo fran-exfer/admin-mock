@@ -31,7 +31,7 @@ function AuthPanel() {
   return (
     <section className={styles.authpanel}>
       <div className="panel">
-        <h1>Please log in</h1>
+        <h1 className="heading">Please log in</h1>
         {authError && <p className="error">Wrong username/password!</p>}
         <form onSubmit={handleSubmit}>
           <div className="control">

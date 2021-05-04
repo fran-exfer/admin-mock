@@ -13,7 +13,7 @@
   border-radius: 5px;
   box-shadow: 0 0 1rem rgba(black, 0.2);
 
-  h1 {
+  > .heading {
     margin-bottom: 1rem;
   }
 }
@@ -37,6 +37,7 @@ form {
 }
 
 input[type='text'],
+input[type='number'],
 input[type='password'],
 input[type='email'],
 textarea {
@@ -93,4 +94,25 @@ textarea {
   border: 1px solid var(--c-danger-50);
   border-radius: 5px;
   color: var(--c-danger-30);
+}
+
+// Modals
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: hsla(0, 0, 0, 0.5);
+
+  & > .panel {
+    width: 100%;
+    max-width: 30rem;
+  }
 }
