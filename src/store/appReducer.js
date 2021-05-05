@@ -35,10 +35,11 @@ function appReducer(state, action) {
       };
 
     case 'data/delete':
+      console.log(action);
       return {
         ...state,
         [action.datatype]: state[action.datatype].filter(
-          (item) => item.id !== action.data.id
+          (item) => item.id !== action.id
         ),
       };
 

@@ -5,6 +5,7 @@ import AppContext from '../../store/AppContext';
 import DataSelector from './DataSelector';
 import DataTable from './DataTable';
 import ClientsModal from './ClientsModal';
+import ProductsModal from './ProductsModal';
 
 function DataPanel() {
   const [datatype, setDatatype] = useState('clients');
@@ -32,7 +33,12 @@ function DataPanel() {
         <DataTable datatype={datatype} />
       </div>
 
-      {state.isModalOpen && <>{datatype === 'clients' && <ClientsModal />}</>}
+      {state.isModalOpen && (
+        <>
+          {datatype === 'clients' && <ClientsModal />}
+          {datatype === 'products' && <ProductsModal />}
+        </>
+      )}
     </section>
   );
 }

@@ -39,3 +39,9 @@ export async function updateData(datatype, id, data) {
 
   return updatedItem.json();
 }
+
+export function deleteData(datatype, id) {
+  return fetch(`${HOST}/${datatype}/${id}`, {
+    method: 'DELETE',
+  });
+}

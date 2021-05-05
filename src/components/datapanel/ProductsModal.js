@@ -3,18 +3,22 @@ import { useContext, useRef, useEffect } from 'react';
 import AppContext from '../../store/AppContext';
 import submitDatatype from '../../utils/submitDatatype';
 
-function ClientsModal() {
+function ProductsModal() {
   const [state, dispatch] = useContext(AppContext);
 
   const nameRef = useRef();
-  const emailRef = useRef();
-  const addressRef = useRef();
+  const referenceRef = useRef();
+  const typeRef = useRef();
+  const stockRef = useRef();
+  const priceRef = useRef();
 
   useEffect(() => {
     if (state.modalCurrentItem !== null) {
       nameRef.current.value = state.modalCurrentItem.name;
-      emailRef.current.value = state.modalCurrentItem.email;
-      addressRef.current.value = state.modalCurrentItem.address;
+      referenceRef.current.value = state.modalCurrentItem.reference;
+      typeRef.current.value = state.modalCurrentItem.type;
+      stockRef.current.value = state.modalCurrentItem.stock;
+      priceRef.current.value = state.modalCurrentItem.price;
     }
   }, [state.modalCurrentItem]);
 
@@ -27,11 +31,13 @@ function ClientsModal() {
 
     const data = {
       name: nameRef.current.value,
-      email: emailRef.current.value,
-      address: addressRef.current.value,
+      reference: referenceRef.current.value,
+      type: typeRef.current.value,
+      stock: stockRef.current.value,
+      price: priceRef.current.value,
     };
 
-    submitDatatype('clients', data, state, dispatch);
+    submitDatatype('products', data, state, dispatch);
   };
 
   return (
@@ -45,12 +51,20 @@ function ClientsModal() {
             <input type="text" ref={nameRef} />
           </div>
           <div className="control">
-            <label>Email:</label>
-            <input type="email" ref={emailRef} />
+            <label>Reference:</label>
+            <input type="text" ref={referenceRef} />
           </div>
           <div className="control">
-            <label>Address:</label>
-            <input type="text" ref={addressRef} />
+            <label>Type:</label>
+            <input type="text" ref={typeRef} />
+          </div>
+          <div className="control">
+            <label>Stock:</label>
+            <input type="number" ref={stockRef} />
+          </div>
+          <div className="control">
+            <label>Price:</label>
+            <input type="number" step="any" ref={priceRef} />
           </div>
           <div className="flex justify-around mt-2">
             <button
@@ -68,4 +82,4 @@ function ClientsModal() {
   );
 }
 
-export default ClientsModal;
+export default ProductsModal;

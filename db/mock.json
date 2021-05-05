@@ -45,19 +45,40 @@
       "email": "genasi@brumarina.ec",
       "address": "Puerto de Brumarina",
       "id": 8
-    },
-    {
-      "id": 9,
-      "name": "asdf",
-      "email": "asdf@asdf.com",
-      "address": "asdf"
-    },
-    {
-      "id": 10,
-      "name": "asdf",
-      "email": "asdf@asdf.com",
-      "address": "asdf"
     }
   ],
-  "products": []
+  "products": [
+    {
+      "id": 1,
+      "name": "Turbocuum IX",
+      "reference": "#A98D234G",
+      "type": "Vacuum",
+      "stock": "350",
+      "price": "49.99"
+    },
+    {
+      "id": 2,
+      "name": "Mokkafee 80 Mate",
+      "reference": "#ASD45G56",
+      "type": "Cuisine",
+      "stock": "25",
+      "price": "99.90"
+    },
+    {
+      "id": 3,
+      "name": "Paelläan",
+      "reference": "#45GA45GR",
+      "type": "Cuisine",
+      "stock": "0",
+      "price": "54.99"
+    },
+    {
+      "id": 4,
+      "name": "Stuff",
+      "reference": "#3456HT45",
+      "type": "Heating",
+      "stock": "50",
+      "price": "24.99"
+    }
+  ]
 }

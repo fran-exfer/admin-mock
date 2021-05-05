@@ -17,7 +17,11 @@ function DataTable({ datatype }) {
     dispatch({ type: 'modal/open', item });
   };
 
-  const handleDelete = (id) => {};
+  const handleDelete = (id) => {
+    api
+      .deleteData(datatype, id)
+      .then(() => dispatch({ type: 'data/delete', datatype, id }));
+  };
 
   if (state[datatype].length === 0) {
     return <p>{`There are no ${datatype} in the system.`}</p>;
