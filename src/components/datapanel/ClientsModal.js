@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 
 import AppContext from '../../store/AppContext';
 import * as api from '../../api/functions';
@@ -9,6 +9,14 @@ function ClientsModal() {
   const nameRef = useRef();
   const emailRef = useRef();
   const addressRef = useRef();
+
+  useEffect(() => {
+    if (state.modalCurrentItem !== null) {
+      nameRef.current.value = state.modalCurrentItem.name;
+      emailRef.current.value = state.modalCurrentItem.email;
+      addressRef.current.value = state.modalCurrentItem.address;
+    }
+  }, [state.modalCurrentItem]);
 
   const handleClose = () => {
     dispatch({ type: 'modal/close' });
@@ -34,11 +42,10 @@ function ClientsModal() {
       });
     } else {
       // Updating an item
-      api
-        .updateData('clients', state.modalCurrentItem.id, data)
-        .then(() =>
-          dispatch({ type: 'data/update', datatype: 'clients', data })
-        );
+      api.updateData('clients', state.modalCurrentItem.id, data).then(() => {
+        dispatch({ type: 'data/update', datatype: 'clients', data });
+        dispatch({ type: 'modal/close' });
+      });
     }
   };
 

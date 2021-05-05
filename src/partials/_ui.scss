@@ -61,6 +61,11 @@ textarea {
   font-size: 1rem;
   transition: 0.2s all;
 
+  &--sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
   $buttons: ('primary', 'secondary', 'danger');
   @each $type in $buttons {
     &--#{$type} {

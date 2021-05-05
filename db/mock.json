@@ -5,10 +5,10 @@
   },
   "clients": [
     {
-      "id": 1,
       "name": "Joseph McGilligan",
       "email": "j.mcgilligan@fmail.com",
-      "address": "Test St. 1, 4th floor"
+      "address": "Test St. 1, 5th floor",
+      "id": 1
     },
     {
       "id": 2,
@@ -39,6 +39,12 @@
       "name": "Harry Potter",
       "email": "h.potter@hogwarts.co.uk",
       "address": "Cupboard under the stairs, 4 Privet Drive"
+    },
+    {
+      "name": "Alara Mareablanca",
+      "email": "genasi@brumarina.ec",
+      "address": "Puerto de Brumarina",
+      "id": 8
     }
   ],
   "products": []
