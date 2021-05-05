@@ -44,39 +44,41 @@ function DataTable({ datatype }) {
   const datatypeKeys = Object.keys(state[datatype][0]);
 
   return (
-    <table className={styles.datatable}>
-      <thead>
-        <tr>
-          {datatypeKeys.map((key) => (
-            <th key={key}>{key}</th>
-          ))}
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {state[datatype].map((item) => (
-          <tr key={item.id}>
+    <div className={styles.datatable}>
+      <table className={styles.datatable}>
+        <thead>
+          <tr>
             {datatypeKeys.map((key) => (
-              <td key={key}>{item[key]}</td>
+              <th key={key}>{key}</th>
             ))}
-            <td>
-              <button
-                onClick={() => handleEdit(item)}
-                className="btn btn--sm btn--primary mr-1"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(item.id)}
-                className="btn btn--sm btn--danger"
-              >
-                Delete
-              </button>
-            </td>
+            <th>Actions</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {state[datatype].map((item) => (
+            <tr key={item.id}>
+              {datatypeKeys.map((key) => (
+                <td key={key}>{item[key]}</td>
+              ))}
+              <td>
+                <button
+                  onClick={() => handleEdit(item)}
+                  className="btn btn--sm btn--primary mr-1"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(item.id)}
+                  className="btn btn--sm btn--danger"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

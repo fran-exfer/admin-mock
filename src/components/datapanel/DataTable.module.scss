@@ -1,19 +1,26 @@
 .datatable {
-  border-collapse: collapse;
+  // Responsive tables with horizontal scroll
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  th,
-  td {
-    border: 0;
-    padding: 0.5rem;
-  }
+  table {
+    border-collapse: collapse;
 
-  > thead {
-    background-color: var(--c-primary-90);
-    text-align: left;
-    text-transform: capitalize;
-  }
+    th,
+    td {
+      border: 0;
+      padding: 0.5rem;
+    }
 
-  > tbody tr:nth-child(2n) {
-    background-color: var(--c-neutral-90);
+    > thead {
+      background-color: var(--c-primary-90);
+      text-align: left;
+      text-transform: capitalize;
+    }
+
+    > tbody tr:nth-child(2n) {
+      background-color: var(--c-neutral-90);
+    }
   }
 }
