@@ -12,26 +12,30 @@ export async function fetchData(datatype) {
   return data.json();
 }
 
-export function createData(dataArray, datatype, data) {
-  data.id = Math.max(...dataArray.map((item) => item.id)) + 1;
+export async function createData(dataArray, datatype, data) {
+  data = { id: Math.max(...dataArray.map((item) => item.id)) + 1, ...data };
 
-  return fetch(`${HOST}/${datatype}`, {
+  const newItem = await fetch(`${HOST}/${datatype}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
+
+  return newItem.json();
 }
 
-export function updateData(datatype, id, data) {
-  data.id = id;
+export async function updateData(datatype, id, data) {
+  data = { id, ...data };
 
-  return fetch(`${HOST}/${datatype}/${id}`, {
+  const updatedItem = await fetch(`${HOST}/${datatype}/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
+
+  return updatedItem.json();
 }

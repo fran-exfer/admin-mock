@@ -5,10 +5,10 @@
   },
   "clients": [
     {
+      "id": 1,
       "name": "Joseph McGilligan",
       "email": "j.mcgilligan@fmail.com",
-      "address": "Test St. 1, 5th floor",
-      "id": 1
+      "address": "Test St. 1, 8th floor"
     },
     {
       "id": 2,
@@ -45,6 +45,18 @@
       "email": "genasi@brumarina.ec",
       "address": "Puerto de Brumarina",
       "id": 8
+    },
+    {
+      "id": 9,
+      "name": "asdf",
+      "email": "asdf@asdf.com",
+      "address": "asdf"
+    },
+    {
+      "id": 10,
+      "name": "asdf",
+      "email": "asdf@asdf.com",
+      "address": "asdf"
     }
   ],
   "products": []
