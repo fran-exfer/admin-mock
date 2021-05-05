@@ -4,7 +4,15 @@ import AppContext from '../../store/AppContext';
 import * as api from '../../api/functions';
 import styles from './DataTable.module.scss';
 
+/*
+ * This component is agnostic to the datatype provided. It loops
+ * through the fields detected in the data model and renders a table
+ * with all of them and some controls.
+ */
 function DataTable({ datatype }) {
+  /*
+   * State and fetching starting data
+   */
   const [state, dispatch] = useContext(AppContext);
 
   useEffect(() => {
@@ -13,6 +21,9 @@ function DataTable({ datatype }) {
       .then((data) => dispatch({ type: 'data/fetch', datatype, data }));
   }, [datatype, dispatch]);
 
+  /*
+   * Handlers
+   */
   const handleEdit = (item) => {
     dispatch({ type: 'modal/open', item });
   };
@@ -23,6 +34,9 @@ function DataTable({ datatype }) {
       .then(() => dispatch({ type: 'data/delete', datatype, id }));
   };
 
+  /*
+   * Render
+   */
   if (state[datatype].length === 0) {
     return <p>{`There are no ${datatype} in the system.`}</p>;
   }

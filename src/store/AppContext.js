@@ -5,12 +5,13 @@ import appReducer from './appReducer';
 const AppContext = createContext(null);
 
 export function AppContextProvider(props) {
+  /*
+   * We hydrate all our app with a state and a reducer function.
+   */
   const reducer = useReducer(appReducer, {
     isAuth: false,
     clients: [],
     products: [],
-    loading: true,
-    error: null,
     isModalOpen: false,
     modalCurrentItem: null,
   });

@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Admin Mock
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Admin Mock is an example CRUD application with a mocked login and two different data tables, which could potentially be scaled to more datatypes. It's made with ⚛ React with hooks using a reducer function shared with Context API. It uses a fake backend served by [json-server](https://github.com/typicode/json-server).
 
-## Available Scripts
+This was mainly done to show my capabilities with React.
 
-In the project directory, you can run:
+## Getting started
+```
+npm install
+```
+Installs the required packages. Then:
+```
+npm start
+```
+Launches `json-server` and `react-scripts start` concurrently using... well, [concurrently](https://github.com/kimmobrunfeldt/concurrently).\
+This will launch the frontend at `localhost:3000` and the backend at `localhost:3004`.
 
-### `npm start`
+## About the decision behind implementation details
+### Context API / useReducer
+Having to lift and share complex state that needed to be read in a table, in a modal form and in various handler functions was making the `DataPanel` parent component too cluttered, so I decided to share some state variables and a reducer function to make changes to that state easier throughout the app using React's [Context API](https://es.reactjs.org/docs/context.html).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Styling
+I recently learnt about [CSS Modules](https://github.com/css-modules/css-modules) and I discovered I could use them with SASS. I don't usually do utility classes, but I think it made sense to use SASS for some easy global styling that could be shared throughout the app, specially keeping in mind most of the app was essentially form components. So I made a bunch of reusable UI utilities along with some flexbox and margin ones using SASS, and if I needed to style a particular component I used a scoped SCSS Module.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Application structure
+```
+db/mock.json - Contains the mocked database by json-server
 
-### `npm test`
+public/ - React's public folder
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+src/
+  index.js - Application's entry point
 
-### `npm run build`
+  api/functions.js - Handles all connections with the backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  components/
+    authentication/ - Auth panel components
+    datapanel/ - Main application components DataPanel is the parent one
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  store/
+    AppContext.js - Wraps all the app in a Context Provider with a shared state
+    appReducer.js - Reducer function that governs important state changes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  utils/ - Functions abstracted to be shared by multiple components
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  index.scss - SASS global styling entry point
+  partials/ - SASS partials imported by index.scss
+```

@@ -8,6 +8,9 @@ import DataPanel from './components/datapanel/DataPanel';
 function App() {
   const [state] = useContext(AppContext);
 
+  /*
+   * Authentication
+   */
   if (!state.isAuthed) {
     return (
       <main>
@@ -16,6 +19,9 @@ function App() {
     );
   }
 
+  /*
+   * App's main functionality
+   */
   return (
     <main>
       <DataPanel />

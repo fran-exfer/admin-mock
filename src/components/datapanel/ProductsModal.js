@@ -4,6 +4,9 @@ import AppContext from '../../store/AppContext';
 import submitDatatype from '../../utils/submitDatatype';
 
 function ProductsModal() {
+  /*
+   * State and references to inputs
+   */
   const [state, dispatch] = useContext(AppContext);
 
   const nameRef = useRef();
@@ -12,6 +15,9 @@ function ProductsModal() {
   const stockRef = useRef();
   const priceRef = useRef();
 
+  /*
+   * If we're editing, populate the inputs
+   */
   useEffect(() => {
     if (state.modalCurrentItem !== null) {
       nameRef.current.value = state.modalCurrentItem.name;
@@ -22,6 +28,9 @@ function ProductsModal() {
     }
   }, [state.modalCurrentItem]);
 
+  /*
+   * Handlers
+   */
   const handleClose = () => {
     dispatch({ type: 'modal/close' });
   };
@@ -40,6 +49,9 @@ function ProductsModal() {
     submitDatatype('products', data, state, dispatch);
   };
 
+  /*
+   * Render the form
+   */
   return (
     <div className="modal">
       <div className="panel">

@@ -8,13 +8,22 @@ import ClientsModal from './ClientsModal';
 import ProductsModal from './ProductsModal';
 
 function DataPanel() {
+  /*
+   * State
+   */
   const [datatype, setDatatype] = useState('clients');
   const [state, dispatch] = useContext(AppContext);
 
+  /*
+   * Handlers
+   */
   const toggleDatatype = () => {
     setDatatype((type) => (type === 'clients' ? 'products' : 'clients'));
   };
 
+  /*
+   * Render
+   */
   return (
     <section>
       <DataSelector datatype={datatype} toggleDatatype={toggleDatatype} />
