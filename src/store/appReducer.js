@@ -35,7 +35,6 @@ function appReducer(state, action) {
       };
 
     case 'data/delete':
-      console.log(action);
       return {
         ...state,
         [action.datatype]: state[action.datatype].filter(
