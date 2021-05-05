@@ -2,6 +2,7 @@ import { useContext, useRef, useEffect } from 'react';
 
 import AppContext from '../../store/AppContext';
 import * as api from '../../api/functions';
+import submitDatatype from '../../utils/submitDatatype';
 
 function ClientsModal() {
   const [state, dispatch] = useContext(AppContext);
@@ -31,28 +32,7 @@ function ClientsModal() {
       address: addressRef.current.value,
     };
 
-    /*
-     * Check if we're creating or updating an item
-     */
-    if (state.modalCurrentItem === null) {
-      // Creating an item
-      api.createData(state.clients, 'clients', data).then((newItem) => {
-        dispatch({ type: 'data/create', datatype: 'clients', data: newItem });
-        dispatch({ type: 'modal/close' });
-      });
-    } else {
-      // Updating an item
-      api
-        .updateData('clients', state.modalCurrentItem.id, data)
-        .then((updatedItem) => {
-          dispatch({
-            type: 'data/update',
-            datatype: 'clients',
-            data: updatedItem,
-          });
-          dispatch({ type: 'modal/close' });
-        });
-    }
+    submitDatatype('clients', data, state, dispatch);
   };
 
   return (
