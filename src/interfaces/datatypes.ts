@@ -7,6 +7,7 @@ export interface Client {
 
 export interface Product {
   id: number;
+  name: string;
   reference: string;
   type: string;
   stock: number;

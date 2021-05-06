@@ -1,19 +1,31 @@
-const HOST = 'http://localhost:3004';
+import { Client, Product } from '../interfaces/datatypes';
 
-export async function login(typedUsername, typedPassword) {
-  let data = await fetch(`${HOST}/auth`);
-  data = await data.json();
+const HOST: string = 'http://localhost:3004';
 
-  return typedUsername === data.username && typedPassword === data.password;
-}
+type DataType = Client | Product;
 
-export async function fetchData(datatype) {
+export const login = async (user: string, pass: string): Promise<boolean> => {
+  const fetchedData = await fetch(`${HOST}/auth`);
+
+  const parsedData: {
+    username: string;
+    password: string;
+  } = await fetchedData.json();
+
+  return user === parsedData.username && pass === parsedData.password;
+};
+
+export const fetchData = async (datatype: string): Promise<DataType> => {
   const data = await fetch(`${HOST}/${datatype}`);
   return data.json();
-}
+};
 
-export async function createData(dataArray, datatype, data) {
-  data = { id: Math.max(...dataArray.map((item) => item.id)) + 1, ...data };
+export const createData = async (
+  dataArray: DataType[],
+  datatype: string,
+  data: DataType
+): Promise<DataType> => {
+  data.id = Math.max(...dataArray.map((item) => item.id)) + 1;
 
   const newItem = await fetch(`${HOST}/${datatype}`, {
     method: 'POST',
@@ -24,10 +36,14 @@ export async function createData(dataArray, datatype, data) {
   });
 
   return newItem.json();
-}
+};
 
-export async function updateData(datatype, id, data) {
-  data = { id, ...data };
+export const updateData = async (
+  datatype: string,
+  id: number,
+  data: DataType
+): Promise<DataType> => {
+  data.id = id;
 
   const updatedItem = await fetch(`${HOST}/${datatype}/${id}`, {
     method: 'PUT',
@@ -38,10 +54,10 @@ export async function updateData(datatype, id, data) {
   });
 
   return updatedItem.json();
-}
+};
 
-export function deleteData(datatype, id) {
+export const deleteData = (datatype: string, id: number): Promise<Response> => {
   return fetch(`${HOST}/${datatype}/${id}`, {
     method: 'DELETE',
   });
-}
+};

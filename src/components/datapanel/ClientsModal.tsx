@@ -1,23 +1,30 @@
-import { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 
 import AppContext from '../../store/AppContext';
 import submitDatatype from '../../utils/submitDatatype';
 
-function ClientsModal() {
+function ClientsModal(): JSX.Element {
   /*
    * State and references to inputs
    */
   const [state, dispatch] = useContext(AppContext);
 
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const addressRef = useRef();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLInputElement>(null);
 
   /*
    * If we're editing, populate the inputs
    */
   useEffect(() => {
-    if (state.modalCurrentItem !== null) {
+    // TypeScript type narrowing
+    if (
+      nameRef.current &&
+      emailRef.current &&
+      addressRef.current &&
+      state.modalCurrentItem !== null &&
+      'email' in state.modalCurrentItem
+    ) {
       nameRef.current.value = state.modalCurrentItem.name;
       emailRef.current.value = state.modalCurrentItem.email;
       addressRef.current.value = state.modalCurrentItem.address;
@@ -27,20 +34,23 @@ function ClientsModal() {
   /*
    * Handlers
    */
-  const handleClose = () => {
+  const handleClose = (): void => {
     dispatch({ type: 'modal/close' });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
 
-    const data = {
-      name: nameRef.current.value,
-      email: emailRef.current.value,
-      address: addressRef.current.value,
-    };
+    if (nameRef.current && emailRef.current && addressRef.current) {
+      const data = {
+        id: 0,
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        address: addressRef.current.value,
+      };
 
-    submitDatatype('clients', data, state, dispatch);
+      submitDatatype('clients', data, state, dispatch);
+    }
   };
 
   /*

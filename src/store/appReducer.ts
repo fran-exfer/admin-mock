@@ -10,11 +10,13 @@ export interface State {
 
 export type Action =
   | { type: 'auth/login' }
-  | { type: 'data/fetch'; datatype: string; data: Client[] | Product[] }
-  | { type: 'data/create'; datatype: string; data: Client | Product }
-  | { type: 'data/update'; datatype: string; data: Client | Product }
-  | { type: 'data/delete'; datatype: string; id: number }
-  | { type: 'modal/open'; item: Client | Product }
+  | {
+      type: 'data/fetch' | 'data/create' | 'data/update';
+      datatype: 'clients' | 'products';
+      data: Client | Product;
+    }
+  | { type: 'data/delete'; datatype: 'clients' | 'products'; id: number }
+  | { type: 'modal/open'; item: Client | Product | null }
   | { type: 'modal/close' };
 
 function appReducer(state: State, action: Action): State {
@@ -56,9 +58,10 @@ function appReducer(state: State, action: Action): State {
       };
 
     case 'data/delete':
+      const newArr = state[action.datatype] as [];
       return {
         ...state,
-        [action.datatype]: state[action.datatype].filter(
+        [action.datatype]: newArr.filter(
           (item: Client | Product) => item.id !== action.id
         ),
       };

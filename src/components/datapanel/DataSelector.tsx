@@ -1,4 +1,11 @@
-function DataSelector({ datatype, toggleDatatype }) {
+import React from 'react';
+
+interface Props {
+  datatype: string;
+  toggleDatatype: () => void;
+}
+
+function DataSelector({ datatype, toggleDatatype }: Props): JSX.Element {
   return (
     <div className="mb-2">
       {datatype === 'clients' ? (

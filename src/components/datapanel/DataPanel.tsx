@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import AppContext from '../../store/AppContext';
 
@@ -7,17 +7,17 @@ import DataTable from './DataTable';
 import ClientsModal from './ClientsModal';
 import ProductsModal from './ProductsModal';
 
-function DataPanel() {
+function DataPanel(): JSX.Element {
   /*
    * State
    */
-  const [datatype, setDatatype] = useState('clients');
+  const [datatype, setDatatype] = useState<'clients' | 'products'>('clients');
   const [state, dispatch] = useContext(AppContext);
 
   /*
    * Handlers
    */
-  const toggleDatatype = () => {
+  const toggleDatatype = (): void => {
     setDatatype((type) => (type === 'clients' ? 'products' : 'clients'));
   };
 

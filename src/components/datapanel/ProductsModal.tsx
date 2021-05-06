@@ -1,52 +1,71 @@
-import { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 
+import { Product } from '../../interfaces/datatypes';
 import AppContext from '../../store/AppContext';
 import submitDatatype from '../../utils/submitDatatype';
 
-function ProductsModal() {
+function ProductsModal(): JSX.Element {
   /*
    * State and references to inputs
    */
   const [state, dispatch] = useContext(AppContext);
 
-  const nameRef = useRef();
-  const referenceRef = useRef();
-  const typeRef = useRef();
-  const stockRef = useRef();
-  const priceRef = useRef();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const referenceRef = useRef<HTMLInputElement>(null);
+  const typeRef = useRef<HTMLInputElement>(null);
+  const stockRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
 
   /*
    * If we're editing, populate the inputs
    */
   useEffect(() => {
-    if (state.modalCurrentItem !== null) {
+    // Narrow down TypeScript type
+    if (
+      state.modalCurrentItem !== null &&
+      'reference' in state.modalCurrentItem &&
+      nameRef.current &&
+      referenceRef.current &&
+      typeRef.current &&
+      stockRef.current &&
+      priceRef.current
+    ) {
       nameRef.current.value = state.modalCurrentItem.name;
       referenceRef.current.value = state.modalCurrentItem.reference;
       typeRef.current.value = state.modalCurrentItem.type;
-      stockRef.current.value = state.modalCurrentItem.stock;
-      priceRef.current.value = state.modalCurrentItem.price;
+      stockRef.current.value = String(state.modalCurrentItem.stock);
+      priceRef.current.value = String(state.modalCurrentItem.price);
     }
   }, [state.modalCurrentItem]);
 
   /*
    * Handlers
    */
-  const handleClose = () => {
+  const handleClose = (): void => {
     dispatch({ type: 'modal/close' });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
 
-    const data = {
-      name: nameRef.current.value,
-      reference: referenceRef.current.value,
-      type: typeRef.current.value,
-      stock: stockRef.current.value,
-      price: priceRef.current.value,
-    };
+    if (
+      nameRef.current &&
+      referenceRef.current &&
+      typeRef.current &&
+      stockRef.current &&
+      priceRef.current
+    ) {
+      const data: Product = {
+        id: 0,
+        name: nameRef.current.value,
+        reference: referenceRef.current.value,
+        type: typeRef.current.value,
+        stock: Number(stockRef.current.value),
+        price: Number(priceRef.current.value),
+      };
 
-    submitDatatype('products', data, state, dispatch);
+      submitDatatype('products', data, state, dispatch);
+    }
   };
 
   /*

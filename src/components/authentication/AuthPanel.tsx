@@ -1,29 +1,31 @@
-import { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 
 import AppContext from '../../store/AppContext';
 import * as api from '../../api/functions';
 import styles from './AuthPanel.module.scss';
 
-function AuthPanel() {
+function AuthPanel(): JSX.Element {
   const [, dispatch] = useContext(AppContext);
-  const [authError, setAuthError] = useState(false);
+  const [authError, setAuthError] = useState<boolean>(false);
 
-  const usernameRef = useRef();
-  const passwordRef = useRef();
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit: (event: React.FormEvent) => void = (event) => {
     event.preventDefault();
 
-    api
-      .login(usernameRef.current.value, passwordRef.current.value)
-      .then((success) => {
-        if (success) {
-          setAuthError(false);
-          dispatch({ type: 'auth/login' });
-        } else {
-          setAuthError(true);
-        }
-      });
+    if (usernameRef.current && passwordRef.current) {
+      api
+        .login(usernameRef.current.value, passwordRef.current.value)
+        .then((success) => {
+          if (success) {
+            setAuthError(false);
+            dispatch({ type: 'auth/login' });
+          } else {
+            setAuthError(true);
+          }
+        });
+    }
   };
 
   return (

@@ -5,7 +5,7 @@ import AppContext from './store/AppContext';
 import AuthPanel from './components/authentication/AuthPanel';
 import DataPanel from './components/datapanel/DataPanel';
 
-function App() {
+function App(): JSX.Element {
   const [state] = useContext(AppContext);
 
   /*
