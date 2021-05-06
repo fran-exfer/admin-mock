@@ -1,15 +1,19 @@
-import { createContext, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 
-import appReducer from './appReducer';
+import appReducer, { State, Action } from './appReducer';
 
-const AppContext = createContext(null);
+const AppContext = createContext<[State, React.Dispatch<Action>]>(null);
 
-export function AppContextProvider(props) {
+interface Props {
+  children: React.ReactNode;
+}
+
+export function AppContextProvider(props: Props) {
   /*
    * We hydrate all our app with a state and a reducer function.
    */
   const reducer = useReducer(appReducer, {
-    isAuth: false,
+    isAuthed: false,
     clients: [],
     products: [],
     isModalOpen: false,

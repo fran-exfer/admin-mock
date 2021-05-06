@@ -1,4 +1,23 @@
-function appReducer(state, action) {
+import { Client, Product } from '../interfaces/datatypes';
+
+export interface State {
+  isAuthed: boolean;
+  clients: Client[];
+  products: Product[];
+  isModalOpen: boolean;
+  modalCurrentItem: Client | Product | null;
+}
+
+export type Action =
+  | { type: 'auth/login' }
+  | { type: 'data/fetch'; datatype: string; data: Client[] | Product[] }
+  | { type: 'data/create'; datatype: string; data: Client | Product }
+  | { type: 'data/update'; datatype: string; data: Client | Product }
+  | { type: 'data/delete'; datatype: string; id: number }
+  | { type: 'modal/open'; item: Client | Product }
+  | { type: 'modal/close' };
+
+function appReducer(state: State, action: Action): State {
   switch (action.type) {
     /*
      * Authentication
@@ -29,7 +48,9 @@ function appReducer(state, action) {
     case 'data/update':
       return {
         ...state,
-        [action.datatype]: state[action.datatype].map((item) =>
+        [action.datatype]: state[
+          action.datatype
+        ].map((item: Client | Product) =>
           item.id === action.data.id ? action.data : item
         ),
       };
@@ -38,7 +59,7 @@ function appReducer(state, action) {
       return {
         ...state,
         [action.datatype]: state[action.datatype].filter(
-          (item) => item.id !== action.id
+          (item: Client | Product) => item.id !== action.id
         ),
       };
 
@@ -57,14 +78,6 @@ function appReducer(state, action) {
         ...state,
         isModalOpen: false,
       };
-
-    /*
-     * If an action.type isn't supported, we should at least throw an error.
-     */
-    default:
-      throw new Error(
-        `Action type ${action.type} isn't accepted by appReducer`
-      );
   }
 }
 
